@@ -1,5 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useAgent } from '../../hooks/useAgent';
+import ReviewForm from '../Reviews/ReviewForm';
+import Reviews from '../Reviews/Reviews';
 
 const AgentDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -27,6 +29,10 @@ const AgentDetails = () => {
           <h4>About Me</h4>
           <p>{agent?.aboutMe}</p>
         </div>
+      </div>
+
+      <div>
+        <Reviews agent={agent} />
       </div>
     </div>
   );
