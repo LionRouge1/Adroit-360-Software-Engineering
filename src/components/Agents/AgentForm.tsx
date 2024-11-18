@@ -1,18 +1,8 @@
-import React, { FC, useState } from 'react';
-import { IAgent } from '../../types/Agent';
-import axios from 'axios';
+import { IAgentForm } from '../../types/Agent';
 
-const AgentForm: FC = () => {
-  const [agent, setAgent] = useState({
-    firstName: '',
-    lastName: '',
-    photoUrl: '',
-    agentLicence: '',
-    address: '',
-    practiceAreas: [] as string[],
-    aboutMe: ''
-  });
+const AgentForm = ({ agentData, handleSubmit}: IAgentForm) => {
   const practiceAreas = ['Los Angeles', 'San Diego', 'New York', 'Miami'];
+  const { agent, setAgent } = agentData;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -20,19 +10,6 @@ const AgentForm: FC = () => {
       ...prevAgent,
       [name]: value,
     }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const agentData = {...agent, practiceAreas: agent.practiceAreas.join(', ')}
-    axios.post('/agents', {agentData})
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
   };
 
   const handleCheckboxChange = (area: string) => {
