@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import Agent from "./Agent";
 import { IAgent } from "../../types/Agent";
 import axios from "axios";
-import './Agents.css'
 
 const Agents: FC = () => {
   const [agents, setAgents] = useState<IAgent[]>([]);
