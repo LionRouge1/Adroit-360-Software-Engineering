@@ -34,7 +34,11 @@ Agent.init(
       allowNull: false
     },
     practiceAreas: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      get() {
+        const areas = this.getDataValue('practiceAreas');
+        return areas ? areas.split(',') : [];
+      }
     },
     aboutMe: {
       type: Sequelize.TEXT
