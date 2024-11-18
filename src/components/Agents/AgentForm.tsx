@@ -22,7 +22,7 @@ const AgentForm = ({ agentData, handleSubmit}: IAgentForm) => {
   };
 
   return (
-    <div className="agent-form">
+    <div className="container" style={{width: '60%'}}>
       <h1>Add a New Agent</h1>
 
       <form className="row g-3" onSubmit={handleSubmit}>

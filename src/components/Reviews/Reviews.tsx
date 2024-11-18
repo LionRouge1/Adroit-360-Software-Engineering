@@ -34,6 +34,7 @@ const Reviews: FC<{ agent: IAgent }> = ({agent}) => {
         ))
       }
     </ul>
+    <Link to={'/'} className="btn btn-outline-primary me-3">&larr; Back</Link>
     <Link to={`/agents/${agent.id}/reviews/create`} className="btn btn-primary">Write a review</Link>
     </>
   );

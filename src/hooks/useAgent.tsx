@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { IAgent } from '../types/Agent';
 import axios from 'axios';
+import { MessageContext } from '../contexts/MessageContext';
 
 export const useAgent = (id: string) => {
   const [agent, setAgent] = useState<IAgent | null>(null);
   const [loading, setLoading] = useState(true);
+  const { setMessage } = useContext(MessageContext);
 
   useEffect(() => {
     const fetchAgent = async () => {
@@ -15,7 +17,7 @@ export const useAgent = (id: string) => {
         })
         .catch((error) =>{
           setLoading(false);
-          console.error('Error fetching agent:', error);
+          setMessage({ message: 'Error fetching agent', type: 'danger' });
         });
     };
 

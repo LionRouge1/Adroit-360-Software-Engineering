@@ -8,7 +8,7 @@ const MessageDisplay: React.FC = () => {
   return (
     <div className={`alert alert-${message.type}`} role="alert">
       <span>{message.message}</span>
-      <button type="button" onClick={clearMessage} className="btn">Dismiss</button>
+      <button type="button" onClick={clearMessage} className="btn btn-outline-dark">Dismiss</button>
     </div>
   );
 };
