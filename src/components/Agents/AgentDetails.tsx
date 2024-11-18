@@ -5,14 +5,19 @@ import Reviews from '../Reviews/Reviews';
 
 const AgentDetails = () => {
   const { id } = useParams<{ id: string }>();
-  const {agent, loading} = useAgent(id as string);
+  const { agent, loading } = useAgent(id as string);
 
   if (loading) return <h2>Loading...</h2>;
   if (!agent) return <h2>Agent not found</h2>;
   return (
     <div className="container">
-      <div className="row" style={{height: '150px'}}>
-        <img className="col-md-3" src={agent?.photoUrl} alt={`${agent?.firstName}'s photo`} />
+      <div className="row" style={{ height: '150px' }}>
+        <img
+          className="col-md-3"
+          src={agent?.photoUrl}
+          alt={`${agent?.firstName}'s photo`}
+          style={{ height: '100%' }}
+        />
         <div className="col-md-8">
           <h3>{`${agent?.firstName} ${agent?.lastName}`}</h3>
           <p className="d-flex justify-content-space-between"><span><strong>Address: </strong> {agent?.address} </span><span><strong>Licence: </strong> {agent?.agentLicence} </span></p>
