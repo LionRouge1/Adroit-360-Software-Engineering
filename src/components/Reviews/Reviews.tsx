@@ -11,19 +11,20 @@ const Reviews: FC<{ agent: IAgent }> = ({agent}) => {
 
   useEffect(() => {
     const fetchAllReview = async () => {
-      const response = await axios.get('/agent/:id/reviews');
+      const response = await axios.get(`/agents/${agent.id}/reviews`);
       setReviews(response.data)
     };
 
     fetchAllReview();
-  }, [reviews])
+  }, [])
 
   return(
     <>
-        <ul className="reviews">
+      <h2>All the reviews</h2>
+        <ul className="reviews overflow-auto list-unstyled mt-3" style={{width: '400px', maxHeight: '300px'}}>
       {
         reviews.map(({id, rating, comment}) => (
-          <li className="review" key={id}>
+          <li className="review border mb-2" key={id}>
             <Rating
               initialRating={rating}
               stop={rating}
