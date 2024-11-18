@@ -1,5 +1,5 @@
 const express = require('express');
-const { Agent } = require('./model');
+const { Agent, Review } = require('./model');
 
 const app = express();
 app.use(express.json());
@@ -24,5 +24,23 @@ app.get('/agents/:id', async (req, res) => {
   }
   return res.json(agent);
 });
+
+app.post('/reviews', async (req, res) => {
+  console.log("requst body:", req.body)
+  const review = await Review.create(req.body.reviewData)
+
+  return res.json(review)
+});
+
+app.get('/agents/:id/reviews', async (req, res) => {
+  const agent = await Agent.findByPk(req.params.id);
+
+  if (!agent) {
+    return res.status(404).end();
+  }
+  const reviews = agent.getReviews();
+
+  return res.json(reviews)
+})
 
 module.exports = app;

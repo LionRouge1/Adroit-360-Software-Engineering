@@ -65,7 +65,7 @@ Review.init(
       defaultValue: 0,
       allowNull: false
     },
-    review: {
+    comment: {
       type: Sequelize.TEXT,
       allowNull: false
     }
@@ -80,7 +80,11 @@ Agent.hasMany(Review, {
   onDelete: 'CASCADE',
 });
 
+Review.belongsTo(Agent);
+
+
 module.exports = {
   sequelize,
-  Agent
+  Agent,
+  Review
 };
