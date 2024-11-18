@@ -1,4 +1,3 @@
-import { useState, FormEvent } from 'react';
 import Rating from 'react-rating';
 import { IReviewForm } from '../../types/Review';
 
@@ -26,9 +25,9 @@ const ReviewForm = ({reviewData, handleSubmit, submitData}: IReviewForm) => {
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
         <label htmlFor="ration" className="form-label">Rate this Agent</label>
-        <Rating                   // Allows half-star ratings
-        onChange={(value) => ratingChange(value)} // Callback
-        initialRating={review.rating}  // Initial rating
+        <Rating
+        onChange={(value) => ratingChange(value)}
+        initialRating={review.rating}
         className='form-control border-0'
       />
       </div>

@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import { useAgent } from '../../hooks/useAgent';
-import ReviewForm from '../Reviews/ReviewForm';
 import Reviews from '../Reviews/Reviews';
 
 const AgentDetails = () => {
