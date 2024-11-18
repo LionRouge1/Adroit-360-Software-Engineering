@@ -18,7 +18,7 @@ const CreateReview = () => {
     setIsSubmitting(true);
 
     try {
-      const reviewData = { ...review, agentId: agent?.id }
+      const reviewData = { ...review, AgentId: agent?.id }
       console.log(reviewData);
       axios.post('/reviews', { reviewData })
         .then((response) => {
