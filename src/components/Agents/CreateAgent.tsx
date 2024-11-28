@@ -5,7 +5,7 @@ import AgentForm from './AgentForm';
 import { MessageContext } from '../../contexts/MessageContext';
 
 const CreateAgent: FC = () => {
-  const [agent, setAgent] = useState({
+  const [agentData, setAgentData] = useState({
     firstName: '',
     lastName: '',
     photoUrl: '',
@@ -17,11 +17,10 @@ const CreateAgent: FC = () => {
   const { setMessage } = useContext(MessageContext);
   const navigate = useNavigate();
 
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const agentData = {...agent, practiceAreas: agent.practiceAreas.join(', ')}
-    axios.post('/agents', {agentData})
+    const agentDatas = {...agentData, practiceAreas: agentData.practiceAreas.join(', ')}
+    axios.post('/agents', {agentDatas})
     .then(({data}) => {
       navigate(`/agents/${data.id}`);
       setMessage({message: 'Agent created successfully', type: 'success'});
@@ -33,7 +32,7 @@ const CreateAgent: FC = () => {
   };
 
   return (
-    <AgentForm agentData={{agent, setAgent}} handleSubmit={handleSubmit} />
+    <AgentForm agentDatas={{agentData, setAgentData}} handleSubmit={handleSubmit} />
   );
 }
 

@@ -1,10 +1,20 @@
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAgent } from '../../hooks/useAgent';
 import Reviews from '../Reviews/Reviews';
 
 const AgentDetails = () => {
   const { id } = useParams<{ id: string }>();
   const { agent, loading } = useAgent(id as string);
+  const navigate = useNavigate();
+
+  const confirmDelete = () => {
+    const confirm = window.confirm('Are you sure you want to delete this agent?');
+
+    if (confirm) {
+      // delete agent
+      navigate(`/agents/${id}/delete`);
+    }
+  };
 
   if (loading) return <h2>Loading...</h2>;
   if (!agent) return <h2>Agent not found</h2>;
@@ -32,6 +42,10 @@ const AgentDetails = () => {
         <div className="col-md-8">
           <h4>About Me</h4>
           <p>{agent?.aboutMe}</p>
+        </div>
+        <div className="d-flex space-between">
+        <Link to={`/agents/${id}/edit`} className="btn btn-primary">Edit</Link>
+        <button type="button" onClick={confirmDelete} className='btn btn-danger'>Delete</button>
         </div>
       </div>
 

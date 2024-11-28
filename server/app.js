@@ -10,7 +10,7 @@ app.get('/agents', async (req, res, next) => {
 });
 
 app.post('/agents', async (req, res) => {
-  const agents = await Agent.create(req.body.agentData);
+  const agents = await Agent.create(req.body.agentDatas);
   return res.json(agents);
 });
 
@@ -39,6 +39,34 @@ app.get('/agents/:id/reviews', async (req, res) => {
   const reviews = await agent.getReviews();
 
   return res.json(reviews)
-})
+});
+
+app.put('/agents/:id', async (req, res) => {
+  const [rowsUpdated] = await Agent.update(req.body.agentDatas, {
+    where: {
+      id: req.params.id
+    }
+  });
+
+  if (rowsUpdated === 0) {
+    return res.status(404).end();
+  } else {
+    return res.json({ rowsUpdated }).status(200);
+  }
+});
+
+app.delete('/agents/:id', async (req, res) => {
+  const rowsDeleted = await Agent.destroy({
+    where: {
+      id: req.params.id
+    }
+  });
+
+  if (rowsDeleted === 0) {
+    return res.status(404).end();
+  } else {
+    return res.status(204).end();
+  }
+});
 
 module.exports = app;

@@ -1,19 +1,23 @@
 import { IAgentForm } from '../../types/Agent';
 
-const AgentForm = ({ agentData, handleSubmit}: IAgentForm) => {
+const AgentForm = ({ agentDatas, handleSubmit}: IAgentForm) => {
   const practiceAreas = ['Los Angeles', 'San Diego', 'New York', 'Miami'];
-  const { agent, setAgent } = agentData;
+  const { agentData, setAgentData } = agentDatas;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setAgent((prevAgent) => ({
+    setAgentData((prevAgent) => ({
       ...prevAgent,
       [name]: value,
     }));
   };
 
+  const goBack = () => {
+    window.history.back();
+  };
+
   const handleCheckboxChange = (area: string) => {
-    setAgent((prevAgent) => ({
+    setAgentData((prevAgent) => ({
       ...prevAgent,
       practiceAreas: prevAgent.practiceAreas?.includes(area)
         ? prevAgent.practiceAreas?.filter((pArea) => pArea !== area)
@@ -28,23 +32,68 @@ const AgentForm = ({ agentData, handleSubmit}: IAgentForm) => {
       <form className="row g-3" onSubmit={handleSubmit}>
         <div className="col-md-4 mb-3">
           <label htmlFor="firstname" className="form-label">First name</label>
-          <input type="text" className="form-control" onChange={handleChange} id="firstname" name="firstName" placeholder="First name" required />
+          <input
+            type="text"
+            className="form-control"
+            onChange={handleChange}
+            id="firstname"
+            name="firstName"
+            { ...agentData.firstName && { value: agentData.firstName } }
+            placeholder="First name"
+            required
+          />
         </div>
         <div className="col-md-4 mb-3">
           <label htmlFor="lastname" className="form-label">Last name</label>
-          <input type="text" onChange={handleChange} className="form-control" id="lastname" name="lastName" placeholder="Last name" required />
+          <input
+            type="text"
+            onChange={handleChange}
+            className="form-control"
+            id="lastname"
+            name="lastName"
+            { ...agentData.lastName && { value: agentData.lastName } }
+            placeholder="Last name"
+            required
+          />
         </div>
         <div className="col-md-4 mb-3">
           <label htmlFor="photourl" className="form-label">Photo Url</label>
-          <input type="text" onChange={handleChange} className="form-control" id="photourl" name="photoUrl" placeholder="https://image.domain.com/image.png" required />
+          <input
+            type="text"
+            onChange={handleChange}
+            className="form-control"
+            id="photourl"
+            name="photoUrl"
+            { ...agentData.photoUrl && { value: agentData.photoUrl } }
+            placeholder="https://image.domain.com/image.png"
+            required
+          />
         </div>
         <div className="col-md-4 mb-3">
           <label htmlFor="agentLicence" className="form-label">Agent Licence</label>
-          <input type="text" onChange={handleChange} className="form-control" id="agentLicence" name="agentLicence" placeholder="1234567890" required />
+          <input
+            type="text"
+            onChange={handleChange}
+            className="form-control"
+            id="agentLicence"
+            name="agentLicence"
+            { ...agentData.agentLicence && { value: agentData.agentLicence } }
+            placeholder="1234567890"
+            required
+          />
         </div>
         <div className="col-md-4 mb-3">
           <label htmlFor="address" className="form-label">Address</label>
-          <input type="text" onChange={handleChange} className="form-control" id="address" name="address" placeholder="Address" required />
+          <input
+            type="text"
+            onChange={handleChange}
+            className="form-control"
+            id="address"
+            name="address"
+            { ...agentData.address && { value: agentData.address } }
+            placeholder="Address"
+            required
+          />
         </div>
         <h4>Select Practice Areas</h4>
         {
@@ -54,7 +103,7 @@ const AgentForm = ({ agentData, handleSubmit}: IAgentForm) => {
                 className="form-check-input"
                 onChange={() => handleCheckboxChange(area)}
                 type="checkbox"
-                checked={agent.practiceAreas?.includes(area)}
+                checked={agentData.practiceAreas?.includes(area)}
                 value={area}
                 id={area}
               />
@@ -66,10 +115,19 @@ const AgentForm = ({ agentData, handleSubmit}: IAgentForm) => {
         }
         <div className="col-md-6 mb-3">
           <label htmlFor="aboutMe" className="form-label">About Me</label>
-          <textarea onChange={handleChange} className="form-control" id="aboutMe" name="aboutMe" placeholder="About Me" required />
+          <textarea
+            onChange={handleChange}
+            className="form-control"
+            id="aboutMe"
+            name="aboutMe"
+            { ...agentData.aboutMe && { value: agentData.aboutMe } }
+            placeholder="About Me"
+            required
+          />
         </div>
         <button className="btn btn-primary" type="submit">Submit form</button>
       </form>
+      <button className="btn btn-danger mt-3" onClick={goBack}>&larr; Back</button>
     </div>
   );
 };
